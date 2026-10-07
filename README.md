@@ -248,3 +248,214 @@ You are welcome to still raise bugs in this repo.
 ## Code of Conduct
 
 See [our code of conduct](CODE_OF_CONDUCT.md).
+
+Combine as one I understand — you want it under your own GitHub account only.
+
+The next step is straightforward:
+
+1. Create a new repo under your account
+2. Add the evidence checklist app
+3. Commit it
+4. Push it to GitHub
+
+I can help you do that, but I need the exact repo name you want to use.
+
+For example:
+- `evidence-preservation-checklist`
+- `device-security-evidence`
+- `android-evidence-log`
+
+Pick a repo name, and I’ll set it up.
+
+If you want, I can also give you a minimal template right away in a single HTML file so you can place it in a repo immediately.
+
+Example repo name:
+- `evidence-preservation-checklist`
+
+Then the file structure would be:
+
+```text
+evidence-preservation-checklist/
+  index.html
+```
+
+And you can open it directly in a browser.
+
+If you want it as a React app instead, the structure would be:
+```text
+evidence-preservation-checklist/
+  package.json
+  src/
+    App.jsx
+    main.jsx
+```
+
+But for the fastest path, a single `index.html` file is easiest.
+
+Tell me:
+- “Use single HTML file”
+or
+- “Use React app”
+
+and I’ll give you the exact content.Yes — the easiest and fastest approach is a single HTML file in a repo under your account.
+
+Here’s the exact repo setup:
+
+1. Create a new repo in your GitHub account
+   - Example name: `evidence-preservation-checklist`
+
+2. Add a single file:
+   - `index.html`
+
+3. Paste this into `index.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evidence Preservation Checklist</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: #f3f4f6;
+      margin: 0;
+      padding: 32px 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+    .section {
+      margin-top: 24px;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      margin-top: 16px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      background: #0f172a;
+      color: #f8fafc;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    .timestamp {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Evidence Preservation Checklist</h1>
+
+    <div class="timestamp" id="timestamp"></div>
+
+    <div class="section">
+      <label for="deviceInfo">Device info</label>
+      <textarea id="deviceInfo" placeholder="Model, Android version, IMEI if applicable, device ID, screenshots saved?"></textarea>
+
+      <label for="appList">App list</label>
+      <textarea id="appList" placeholder="List all installed apps, suspicious apps, unknown apps, package names if available"></textarea>
+
+      <label for="accounts">Accounts</label>
+      <textarea id="accounts" placeholder="Email, Google account, GitHub account, banking apps, social accounts"></textarea>
+
+      <label for="adminSettings">Unusual admin or device management settings</label>
+      <textarea id="adminSettings" placeholder="Device admin apps, work profile, accessibility settings, unknown management tools"></textarea>
+
+      <label for="permissions">Permissions / installed apps with suspicious access</label>
+      <textarea id="permissions" placeholder="Camera, microphone, contacts, SMS, overlay, accessibility, storage, notifications"></textarea>
+
+      <label for="downloads">Recent downloads / browser history / files</label>
+      <textarea id="downloads" placeholder="Downloads folder, browser history, unusual URLs, file names, file timestamps"></textarea>
+
+      <label for="githubSecurity">GitHub security evidence</label>
+      <textarea id="githubSecurity" placeholder="Sessions, SSH keys, GPG keys, PATs, authorized apps, recent activity, login locations, 2FA status"></textarea>
+
+      <label for="emailLogs">Email / provider security logs</label>
+      <textarea id="emailLogs" placeholder="Open email security settings, suspicious login alerts, account recovery entries, provider audit logs"></textarea>
+
+      <label for="timeline">Timeline / notes</label>
+      <textarea id="timeline" placeholder="When issue started, what changed, suspicious messages, dates/times, screenshots taken"></textarea>
+    </div>
+
+    <button onclick="saveEvidence()">Save evidence locally</button>
+  </div>
+
+  <script>
+    function updateTimestamp() {
+      const stamp = document.getElementById('timestamp');
+      stamp.textContent = "Captured at: " + new Date().toISOString();
+    }
+
+    function saveEvidence() {
+      const data = {
+        capturedAt: new Date().toISOString(),
+        deviceInfo: document.getElementById('deviceInfo').value,
+        appList: document.getElementById('appList').value,
+        accounts: document.getElementById('accounts').value,
+        adminSettings: document.getElementById('adminSettings').value,
+        permissions: document.getElementById('permissions').value,
+        downloads: document.getElementById('downloads').value,
+        githubSecurity: document.getElementById('githubSecurity').value,
+        emailLogs: document.getElementById('emailLogs').value,
+        timeline: document.getElementById('timeline').value
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'evidence-preservation-log.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      alert('Evidence file downloaded successfully.');
+    }
+
+    updateTimestamp();
+  </script>
+</body>
+</html>
+```
+
+4. Commit and push it to GitHub
+5. Open the repo in GitHub and you’ll have a working page
+
+If you want it to be more polished, I can also give you:
+- a styled dark dashboard
+- a printable version
+- a React version
+- a version with a Save button that stores data in localStorage
